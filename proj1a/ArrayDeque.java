@@ -62,11 +62,17 @@ public class ArrayDeque<T> {
 
     public void printDeque() {
         if(isEmpty())return;
-
         for(int i=0;i<size-1;i++){
             System.out.print(items[(head+i)%capacity]+" ");
         }
         System.out.print(items[tail]);
+    }
+
+    private void resizeDown(){
+        double usage=size*1.0/capacity;
+        if(usage<0.25){
+            resize((int)(capacity*0.5));
+        }
     }
 
     public T removeFirst() {
@@ -75,6 +81,7 @@ public class ArrayDeque<T> {
         items[head]=null;
         head=(head+1)%capacity;
         size--;
+        resizeDown();
         return cur;
     }
 
@@ -84,10 +91,13 @@ public class ArrayDeque<T> {
         items[tail]=null;
         tail=(tail-1+capacity)%capacity;
         size--;
+        resizeDown();
         return cur;
     }
 
     public T get(int index) {
+        if(isEmpty()||index>size-1)return null;
         return items[(head+index)%capacity];
     }
+
 }
