@@ -69,6 +69,7 @@ public class LinkedListDeque<T> {
         size--;
         StuffNode cur=first;
         this.first=first.next;
+        first.pre=null;
         return cur.item;
     }
 
@@ -79,6 +80,7 @@ public class LinkedListDeque<T> {
         size--;
         StuffNode cur=last;
         this.last=last.pre;
+        last.next=null;
         return cur.item;
     }
 
@@ -102,5 +104,4 @@ public class LinkedListDeque<T> {
             return X.item;
         return getRecursive(idx+1,index,X.next);
     }
-
 }
