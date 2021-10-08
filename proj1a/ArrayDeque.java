@@ -90,32 +90,4 @@ public class ArrayDeque<T> {
     public T get(int index) {
         return items[(head+index)%capacity];
     }
-
-    public static void main(String[] arg){
-        ArrayDeque<Integer> D =new ArrayDeque<>();
-        for(int i=0;i<5;i++){
-            D.addFirst(i);
-        }
-
-        for(int i=1;i<10;i++){
-            D.addLast(i);
-        }
-
-
-        D.printDeque();
-        System.out.println();
-
-
-        for(int i=0;i<5;i++){
-            D.removeFirst();
-        }
-        D.printDeque();
-        System.out.println();
-
-        for(int i=1;i<10;i++){
-            D.removeLast();
-        }
-
-        D.printDeque();
-    }
 }
