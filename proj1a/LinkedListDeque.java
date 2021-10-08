@@ -47,13 +47,11 @@ public class LinkedListDeque<T> {
         this.size++;
     }
     public boolean isEmpty(){
-        return size>0?false:true;
+        return size==0;
     }
-
     public int size(){
         return this.size;
     }
-
     public void printDeque(){
         StuffNode cur=first;
         System.out.print(cur.item);
@@ -104,4 +102,5 @@ public class LinkedListDeque<T> {
             return X.item;
         return getRecursive(idx+1,index,X.next);
     }
+
 }
