@@ -70,7 +70,7 @@ public class ArrayDeque<T> {
 
     private void resizeDown(){
         double usage=size*1.0/capacity;
-        if(usage<0.25){
+        if(usage<0.25&&capacity>=16){
             resize((int)(capacity*0.5));
         }
     }
@@ -96,7 +96,7 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        if(isEmpty()||index>size-1)return null;
+        if(isEmpty()||index>=size)return null;
         return items[(head+index)%capacity];
     }
 
