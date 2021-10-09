@@ -1,5 +1,5 @@
 public class LinkedListDeque<T> {
-
+    /**nested node*/
     private class StuffNode{
         public T item;
         public StuffNode pre;
@@ -21,28 +21,37 @@ public class LinkedListDeque<T> {
         this.last=null;
     }
 
+
     public void addFirst(T item){
         StuffNode node=new StuffNode(item,null,null);
         node.next=this.first;
-        if(isEmpty()) this.last=node;
-        else this.first.pre=node;
-        this.first=node;
+        if(isEmpty()){
+            this.first=node;
+            this.last=node;
+        }
+        else{
+            this.first.pre=node;
+            this.first=node;
+        }
         this.size++;
     }
 
     public void addLast(T item){
         StuffNode node=new StuffNode(item,null,null);
         node.pre=this.last;
-        if(isEmpty()) this.first=node;
-        else this.last.next=node;
+        if(isEmpty())
+            this.first=node;
+        else
+            this.last.next=node;
         this.last=node;
         this.size++;
     }
-
-    public boolean isEmpty(){return size==0;}
-
-    public int size(){return this.size; }
-
+    public boolean isEmpty(){
+        return size==0;
+    }
+    public int size(){
+        return this.size;
+    }
     public void printDeque(){
         StuffNode cur=first;
         System.out.print(cur.item);
@@ -65,8 +74,9 @@ public class LinkedListDeque<T> {
     }
 
     public T removeLast(){
-        if(this.isEmpty())
+        if(this.isEmpty()){
             return null;
+        }
         size--;
         StuffNode cur=last;
         this.last=last.pre;
