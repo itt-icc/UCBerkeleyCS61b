@@ -69,7 +69,6 @@ public class LinkedListDeque<T> {
         size--;
         StuffNode cur=first;
         this.first=first.next;
-        
         return cur.item;
     }
 
@@ -80,7 +79,6 @@ public class LinkedListDeque<T> {
         size--;
         StuffNode cur=last;
         this.last=last.pre;
-        
         return cur.item;
     }
 
@@ -104,4 +102,26 @@ public class LinkedListDeque<T> {
             return X.item;
         return getRecursive(idx+1,index,X.next);
     }
+//    public static void main(String[] arg){
+//        LinkedListDeque<Integer> D =new LinkedListDeque();
+//        for(int i=0;i<5;i++){
+//            D.addFirst(i);
+//        }
+//        for(int i=100;i<105;i++){
+//            D.addLast(i);
+//        }
+//        D.printDeque();
+//        D.removeFirst();
+//        D.removeLast();
+//        System.out.println();
+//        D.printDeque();
+//        System.out.print("\n"+D.getRecursive(7));
+//        System.out.print("\n"+D.size());
+//        LinkedListDeque<String> D =new LinkedListDeque();
+//        D.addFirst("first");
+//        D.addFirst("second");
+//        D.addFirst("third");
+//        D.printDeque();
+//    }
+
 }
