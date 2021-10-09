@@ -1,13 +1,11 @@
+import java.util.Deque;
+import java.util.LinkedList;
 public class ArrayDeque<T> {
-
-
     private int head;
     private int tail;
     private int capacity;
     private T[]items;
     private int size;
-
-
     public ArrayDeque(){
         this.items=(T[])new Object[8];
         this.capacity=items.length;
@@ -25,7 +23,6 @@ public class ArrayDeque<T> {
         this.items=newItems;
         this.capacity=newCapacity;
     }
-
     public void addFirst(T item) {
         if(isEmpty()){
             this.items[head]=item;
@@ -38,7 +35,6 @@ public class ArrayDeque<T> {
         this.items[this.head]=item;
         this.size++;
     }
-
     public void addLast(T item) {
         if(isEmpty()){
             items[tail]=item;
@@ -51,15 +47,12 @@ public class ArrayDeque<T> {
         items[tail]=item;
         size++;
     }
-
     public boolean isEmpty() {
         return size==0;
     }
-
     public int size() {
         return size;
     }
-
     public void printDeque() {
         if(isEmpty())return;
         for(int i=0;i<size-1;i++){
@@ -67,37 +60,38 @@ public class ArrayDeque<T> {
         }
         System.out.print(items[tail]);
     }
-
     private void resizeDown(){
         double usage=size*1.0/capacity;
         if(usage<0.25&&capacity>=16){
             resize((int)(capacity*0.5));
         }
     }
-
     public T removeFirst() {
         if(isEmpty())return null;
         T cur=items[head];
         items[head]=null;
         head=(head+1)%capacity;
         size--;
+//        System.out.println("removeFirst =" + cur);
+        if(isEmpty())head=tail;
         resizeDown();
         return cur;
     }
-
     public T removeLast() {
         if(isEmpty())return null;
         T cur=items[tail];
         items[tail]=null;
         tail=(tail-1+capacity)%capacity;
         size--;
+//        System.out.println("removeLast =" + cur);
+        if(isEmpty())head=tail;
         resizeDown();
         return cur;
     }
-
     public T get(int index) {
         if(isEmpty()||index>=size)return null;
-        return items[(head+index)%capacity];
+        T cur=items[(head+index)%capacity];
+//        System.out.println("get("+index+") =" + cur);
+        return cur;
     }
-
 }
