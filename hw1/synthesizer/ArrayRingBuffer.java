@@ -6,22 +6,7 @@ import java.util.Iterator;
 //TODO: Make sure to make this class extend AbstractBoundedQueue<t>
 public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
 
-    public Iterator<T> iterator() {
-        return new QueueIterator();
-    }
 
-    private class QueueIterator implements Iterator<T> {
-
-        @Override
-        public boolean hasNext() {
-            return isEmpty();
-        }
-
-        @Override
-        public T next() {
-            return dequeue();
-        }
-    }
 
 
 
@@ -42,6 +27,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         //       here shadows the field we inherit from AbstractBoundedQueue, so
         //       you'll need to use this.capacity to set the capacity.
         this.capacity=capacity;
+        this.fillCount=0;
         first=last=0;
         rb= (T[]) new Object[this.capacity];
     }
@@ -72,8 +58,11 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
             throw new IllegalArgumentException("Ring buffer underflow");
         }
         T cur=rb[first];
+        rb[first]=null;
         first=(first-1+capacity)%capacity;
         fillCount--;
+        if(isEmpty())
+            first=last=0;
         return cur;
     }
 
@@ -89,4 +78,20 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     }
 
     // TODO: When you get to part 5, implement the needed code to support iteration.
+    public Iterator<T> iterator() {
+        return new QueueIterator();
+    }
+
+    private class QueueIterator implements Iterator<T> {
+
+        @Override
+        public boolean hasNext() {
+            return isEmpty();
+        }
+
+        @Override
+        public T next() {
+            return dequeue();
+        }
+    }
 }
